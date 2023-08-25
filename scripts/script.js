@@ -1,4 +1,5 @@
 const names = document.querySelectorAll('.name');
+const temperatures = document.querySelectorAll('.temperature');
 
 const oneDayBtn = document.getElementById("1dayBtn");
 const threeDayBtn = document.getElementById("3dayBtn");
@@ -13,12 +14,12 @@ const minutes = now.getMinutes();
 const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
 oneDayBtn.addEventListener('click', (e) => {
-    console.log("aa");
+    setDayMoments();
 })
 
 threeDayBtn.addEventListener('click', (e) => {
     setNames();
-    getTemperature();
+    setTemperatures();    
     console.log(hours);
 })
 
@@ -36,9 +37,24 @@ function setNames() {
         }
     }
 }
+
+function setDayMoments() {
+    names[0].innerHTML = 'Morning';
+    names[1].innerHTML = 'Afternoon';
+    names[2].innerHTML = 'Evening';
+}
+
+async function setTemperatures() {
+    let arr = await getTemperature();
+
+    for (let i = 0; i < 3; i++) {
+        temperatures[i].innerHTML = arr[(24*i) + hours ];
+    }
+
+}
 async function getTemperature() {
     let temperature = await getData();
-    return temperature.temperature_2m[hours];
+    return temperature.temperature_2m;
 }
 
 async function getData() {
