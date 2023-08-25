@@ -12,21 +12,22 @@ body {
     position: relative;
     flex-direction: column;
     height: 100vh;
-    background-color: red;
+    /* background-color: #353B3C; */
 }
 
 .whole-page {
     display: flex;
     /* position: relative; */
-    height: 86%;
-    width: 96%;
+    height: 100%;
+    width: 100%;
 
     position: absolute;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
+    border-radius: 10px;
 
-    background-color: #fff;
+    
 }
 
 .main-container {
@@ -36,7 +37,11 @@ body {
     align-items: center;
     height: 100%;
     width: 100%;
-    background-color: grey;
+    border-radius: 10px;
+    /* background-color: #C6C7C4; */
+    /* background-color: #A2999E; */
+    background-color: #EEF0F2;
+    box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 3px 6px, rgba(15, 15, 15, 0.4) 0px 9px 24px;
 }
 
 .weather-content {
@@ -47,7 +52,7 @@ body {
 
     height: 90%;
     width: 96%;
-    background-color: green;
+    
 }
 
 .weather {
@@ -61,28 +66,54 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 100%;
+    width: 95%;
+    border-radius: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 .section1 {
-    background-color: #964949;
+    /* background-color: #964949; */
+    background-color: #8571C1;
 }
 
 .section2 {
-    background-color: #69bbb4;
+    /* background-color: #69bbb4; */
+    background-color: #8571C1;
 }
 
 .section3 {
-    background-color: #8360d6;
+    /* background-color: #9A7197; */
+    /* background-color: #8360d6; */
+    background-color: #8571C1;
+
+}
+
+.section {
+    /* background-color:  #FFE099; */
+    background-color: #4FD2E3;
 }
 
 .buttons {
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
 
-    height: 95%;
+    height: 100%;
     width: 100%;
 
+    border-radius: 20px;
+
     background-color: #00ccff;
+    background-color: #353B3C;
+
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.btn {
+    width: 60%;
+    padding: 20px 40px 20px 40px ;
+    border-radius: 10px;
+    background-color:  #FFE099;
 
 }
