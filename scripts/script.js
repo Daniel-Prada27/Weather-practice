@@ -40,7 +40,7 @@ oneDayBtn.addEventListener('click', (e) => {
 threeDayBtn.addEventListener('click', (e) => {
     setNames();
     setTemperatures();    
-    console.log(hours);
+    // console.log(hours);
 })
 
 function setNames() {
@@ -75,6 +75,7 @@ async function setTemperatures() {
 
 }
 
+
 async function getTemperature() {
     let temperature = await getData();
     return temperature.temperature_2m;
@@ -91,121 +92,162 @@ async function getData() {
     return data.hourly;
 }
 
-async function createSvg(code) {
-    const svg = document.createElement(svgXmlns, 'svg');
-    svg.setAttribute('height', iconHeight);
-    svg.setAttribute('width', iconWidth);
-    
-    switch (code) {
-    case 0:
-        svg.setAttribute('viewbox', svgInfo.sunny.viewbox);
-        break;
+async function setIcon() {
+    let weatherCode = await getWeatherCode();
 
-    case 1:
-        svg.setAttribute('viewbox', svgInfo.sunny.viewbox);
-        break;
-
-    case 2:
-        svg.setAttribute('viewbox', svgInfo.partlyCloudy.viewbox);
-        break;
-
-    case 3:
-        svg.setAttribute('viewbox', svgInfo.overcast.viewbox);
-        break;
-
-    case 45:
-        svg.setAttribute('viewbox', svgInfo.fog.viewbox);
-        break;
-
-    case 48:
-        svg.setAttribute('viewbox', svgInfo.fog.viewbox);
-        break;
-
-    case 51:
-        svg.setAttribute('viewbox', svgInfo.drizzleLight.viewbox);
-        break;
-
-    case 53:
-        svg.setAttribute('viewbox', svgInfo.drizzleModerate.viewbox);
-        break;
-
-    case 55:
-        svg.setAttribute('viewbox', svgInfo.drizzleDense.viewbox);
-        break;
-
-    case 56:
-        svg.setAttribute('viewbox', svgInfo.snow.viewbox);
-        break;
-
-    case 57:
-        svg.setAttribute('viewbox', svgInfo.snow.viewbox);
-        break;
-
-    case 61:
-        svg.setAttribute('viewbox', svgInfo.drizzleLight.viewbox);
-        break;
-
-    case 63:
-        svg.setAttribute('viewbox', svgInfo.drizzleModerate.viewbox);
-        break;
-
-    case 65:
-        svg.setAttribute('viewbox', svgInfo.drizzleDense.viewbox);
-        break;
-
-    case 66:
-        svg.setAttribute('viewbox', svgInfo.snow.viewbox);
-        break;
-
-    case 67:
-        svg.setAttribute('viewbox', svgInfo.snow.viewbox);
-        break;
-
-    case 71:
-        svg.setAttribute('viewbox', svgInfo.snow.viewbox);
-        break;
-
-    case 73:
-        svg.setAttribute('viewbox', svgInfo.snow.viewbox);
-        break;
-
-    case 75:
-        svg.setAttribute('viewbox', svgInfo.snow.viewbox);
-        break;
-
-    case 77:
-        svg.setAttribute('viewbox', svgInfo.snow.viewbox);
-        break;
-
-    case 80:
-        svg.setAttribute('viewbox', svgInfo.drizzleLight.viewbox);
-        break;
-
-    case 81:
-        svg.setAttribute('viewbox', svgInfo.drizzleModerate.viewbox);
-        break;
-
-    case 82:
-        svg.setAttribute('viewbox', svgInfo.drizzleDense.viewbox);
-        break;
-
-    case 85:
-        svg.setAttribute('viewbox', svgInfo.snow.viewbox);
-        break;
-
-    case 86:
-        svg.setAttribute('viewbox', svgInfo.snow.viewbox);
-        break;
-
-    case 96:
-        svg.setAttribute('viewbox', svgInfo.drizzleDense.viewbox);
-        break;
-
-    case 99:
-        svg.setAttribute('viewbox', svgInfo.drizzleDense.viewbox);
-        break;
-
-    default:
-        console.log("Unknown code");
-}
+    for (let i = 0; i < 3; i++) {
+        // temperatures[i].innerHTML = arr[(24*i) + hours ];
+        iconSlots[i].append(createSvg(weatherCode[(24*i) + hours]))
     }
+}
+
+function createSvg(code) {
+    const svg = document.createElementNS(svgXmlns, "svg");
+    svg.setAttribute("xmlns", svgXmlns);
+    svg.setAttribute("height", iconHeight);
+    svg.setAttribute("width", iconWidth);
+    let path = document.createElementNS(svgXmlns, "path");
+
+    switch (code) {
+        case 0:
+            svg.setAttribute('viewBox', svgInfo.sunny.viewbox);
+            path.setAttribute('d', svgInfo.sunny.path);
+            break;
+
+        case 1:
+            svg.setAttribute('viewBox', svgInfo.sunny.viewbox);
+            path.setAttribute('d', svgInfo.sunny.path);
+            break;
+
+        case 2:
+            svg.setAttribute('viewBox', svgInfo.partlyCloudy.viewbox);
+            path.setAttribute("d", svgInfo.partlyCloudy.path);
+            break;
+
+        case 3:
+            svg.setAttribute('viewBox', svgInfo.partlyCloudy.viewbox);
+            path.setAttribute('d', svgInfo.partlyCloudy.path);
+            break;
+
+        case 45:
+            svg.setAttribute('viewBox', svgInfo.fog.viewbox);
+            path.setAttribute('d', svgInfo.fog.path);
+            break;
+
+        case 48:
+            svg.setAttribute('viewBox', svgInfo.fog.viewbox);
+            path.setAttribute('d', svgInfo.fog.path);
+            break;
+
+        case 51:
+            svg.setAttribute('viewBox', svgInfo.drizzleLight.viewbox);
+            path.setAttribute('d', svgInfo.drizzleLight.path);
+            break;
+
+        case 53:
+            svg.setAttribute('viewBox', svgInfo.drizzleModerate.viewbox);
+            path.setAttribute('d', svgInfo.drizzleModerate.path);
+            break;
+
+        case 55:
+            svg.setAttribute('viewBox', svgInfo.drizzleDense.viewbox);
+            path.setAttribute('d', svgInfo.drizzleDense.path);
+            break;
+
+        case 56:
+            svg.setAttribute('viewBox', svgInfo.snow.viewbox);
+            path.setAttribute('d', svgInfo.snow.path);
+            break;
+
+        case 57:
+            svg.setAttribute('viewBox', svgInfo.snow.viewbox);
+            path.setAttribute('d', svgInfo.snow.path);
+            break;
+
+        case 61:
+            svg.setAttribute('viewBox', svgInfo.drizzleLight.viewbox);
+            path.setAttribute('d', svgInfo.drizzleLight.path);
+            break;
+
+        case 63:
+            svg.setAttribute('viewBox', svgInfo.drizzleModerate.viewbox);
+            path.setAttribute('d', svgInfo.drizzleModerate.path);
+            break;
+
+        case 65:
+            svg.setAttribute('viewBox', svgInfo.drizzleDense.viewbox);
+            path.setAttribute('d', svgInfo.drizzleDense.path);
+            break;
+
+        case 66:
+            svg.setAttribute('viewBox', svgInfo.snow.viewbox);
+            path.setAttribute('d', svgInfo.snow.path);
+            break;
+
+        case 67:
+            svg.setAttribute('viewBox', svgInfo.snow.viewbox);
+            path.setAttribute('d', svgInfo.snow.path);
+            break;
+
+        case 71:
+            svg.setAttribute('viewBox', svgInfo.snow.viewbox);
+            path.setAttribute('d', svgInfo.snow.path);
+            break;
+
+        case 73:
+            svg.setAttribute('viewBox', svgInfo.snow.viewbox);
+            path.setAttribute('d', svgInfo.snow.path);
+            break;
+
+        case 75:
+            svg.setAttribute('viewBox', svgInfo.snow.viewbox);
+            path.setAttribute('d', svgInfo.snow.path);
+            break;
+
+        case 77:
+            svg.setAttribute('viewBox', svgInfo.snow.viewbox);
+            path.setAttribute('d', svgInfo.snow.path);
+            break;
+
+        case 80:
+            svg.setAttribute('viewBox', svgInfo.drizzleLight.viewbox);
+            path.setAttribute('d', svgInfo.drizzleLight.path);
+            break;
+
+        case 81:
+            svg.setAttribute('viewBox', svgInfo.drizzleModerate.viewbox);
+            path.setAttribute('d', svgInfo.drizzleModerate.path);
+            break;
+
+        case 82:
+            svg.setAttribute('viewBox', svgInfo.drizzleDense.viewbox);
+            path.setAttribute('d', svgInfo.drizzleDense.path);
+            break;
+
+        case 85:
+            svg.setAttribute('viewBox', svgInfo.snow.viewbox);
+            path.setAttribute('d', svgInfo.snow.path);
+            break;
+
+        case 86:
+            svg.setAttribute('viewBox', svgInfo.snow.viewbox);
+            path.setAttribute('d', svgInfo.snow.path);
+            break;
+
+        case 96:
+            svg.setAttribute('viewBox', svgInfo.drizzleDense.viewbox);
+            path.setAttribute('d', svgInfo.drizzleDense.path);
+            break;
+
+        case 99:
+            svg.setAttribute('viewBox', svgInfo.drizzleDense.viewbox);
+            path.setAttribute('d', svgInfo.drizzleDense.path);
+            break;
+
+        default:
+    }
+
+    svg.appendChild(path);
+
+    return svg;
+}
