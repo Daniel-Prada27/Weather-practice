@@ -39,7 +39,8 @@ oneDayBtn.addEventListener('click', (e) => {
 
 threeDayBtn.addEventListener('click', (e) => {
     setNames();
-    setTemperatures();    
+    setTemperatures();
+    setIcon();
     // console.log(hours);
 })
 
@@ -97,6 +98,9 @@ async function setIcon() {
 
     for (let i = 0; i < 3; i++) {
         // temperatures[i].innerHTML = arr[(24*i) + hours ];
+        if (iconSlots[i].childElementCount != 0) {
+            iconSlots[i].childNodes[0].remove();
+        }
         iconSlots[i].append(createSvg(weatherCode[(24*i) + hours]))
     }
 }
